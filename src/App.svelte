@@ -1,53 +1,45 @@
 <script>
-	import Modal from './Modal.svelte';
+  import Modal from "./Modal.svelte";
 
-	let people = [
-		{ name: 'yoshi', beltColor: 'black', age: 25, id: 1 },
-		{ name: 'mario', beltColor: 'orange', age: 45, id: 2 },
-		{ name: 'luigi', beltColor: 'brown', age: 35, id: 3 }
-	];
+  let people = [
+    { name: "yoshi", beltColour: "black", age: 25, id: 1 },
+    { name: "mario", beltColour: "orange", age: 45, id: 2 },
+    { name: "luigi", beltColour: "brown", age: 35, id: 3 },
+  ];
 
-	const handleClick = (id) => {
-		// delete a person from people
-		people = people.filter((person) => person.id != id);
-	};
-
+  const handleClick = (e, id) => {
+    people = people.filter((person) => person.id != id);
+    console.log(e);
+  };
 </script>
+
+<style>
+  main {
+    text-align: center;
+    padding: 1em;
+    max-width: 240px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 640px) {
+    main {
+      max-width: none;
+    }
+  }
+</style>
 
 <Modal />
 <main>
-	{#each people as person (person.id)}
-		<div>
-			<h4>{person.name}</h4>
-			{#if person.beltColor === 'black'}
-				<p>Master Ninja!</p>
-			{/if}
-			<p>{person.age} years old, {person.beltColor} belt.</p>
-			<button on:click={() => handleClick(person.id)}>delete</button>
-		</div>
-	{:else}
-		<p>There are no people to show...</p>
-	{/each}
+  {#each people as person (person.id)}
+    <div>
+      <h4>{person.name}</h4>
+      {#if person.beltColour === 'black'}
+        <p><strong>MASTER NINJA</strong></p>
+      {/if}
+      <p>{person.age} years old, {person.beltColour} belt.</p>
+      <button on:click={(e) => handleClick(e, person.id)}>delete</button>
+    </div>
+  {:else}
+    <p>There are no people to show...</p>
+  {/each}
 </main>
-
-<style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
-</style>
