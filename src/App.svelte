@@ -7,16 +7,12 @@
 </script>
 
 <main>
-	<div>
-		<h4>{people[0].name}</h4>
-		<p>{people[0].beltColor}</p>
-	</div>	<div>
-		<h4>{people[1].name}</h4>
-		<p>{people[1].beltColor}</p>
-	</div>	<div>
-		<h4>{people[2].name}</h4>
-		<p>{people[2].beltColor}</p>
-	</div>
+	{#each people as person}
+		<div>
+			<h4>{person.name}</h4>
+			<p>{person.age} years old, {person.beltColor} belt.</p>
+		</div>
+	{/each}
 </main>
 
 <style>
