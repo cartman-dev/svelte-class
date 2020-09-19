@@ -1,19 +1,19 @@
 <script>
-    import PollDetails from "../shared/PollDetails.svelte";
+  import PollDetails from "../shared/PollDetails.svelte";
 
-    export let polls = [];
+  export let polls = [];
 </script>
 
 <style>
-    .poll-list {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-gap: 20px;
-    }
+  .poll-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+  }
 </style>
 
 <div class="poll-list">
-    {#each polls as poll (poll.id)}
-        <PollDetails {poll}/>
-    {/each}
+  {#each polls as poll (poll.id)}
+    <PollDetails {poll} on:vote />
+  {/each}
 </div>
