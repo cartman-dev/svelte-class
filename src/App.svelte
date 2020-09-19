@@ -51,6 +51,20 @@
     }
     polls = copiedPolls;
   };
+
+  const handleVote = (e) => {
+    const { id, option } = e.detail;
+    let copiedPolls = [...polls];
+    let upvotedPoll = copiedPolls.find((poll) => poll.id == id);
+    if (option === "a") {
+      upvotedPoll.votesA++;
+    }
+    if (option === "b") {
+      upvotedPoll.votesB++;
+    }
+    polls = copiedPolls;
+    console.log(polls);
+  };
 </script>
 
 <style>
