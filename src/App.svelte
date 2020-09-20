@@ -1,9 +1,16 @@
 <script>
+  import PollStore from './stores/PollStore.js';
   import Header from "./components/Header.svelte";
   import Footer from "./components/Footer.svelte";
   import PollList from "./components/PollList.svelte";
   import CreatePollForm from "./components/CreatePollForm.svelte";
   import Tabs from "./shared/Tabs.svelte";
+
+  // polls
+  export let polls = [];
+  PollStore.subscribe(data => {
+    polls = data;
+  });
 
   // tabs
   let items = ["Current Polls", "Add New Poll"];
@@ -12,26 +19,6 @@
   const tabChange = (e) => {
     activeItem = e.detail;
   };
-
-  // polls
-  let polls = [
-    {
-      id: 1,
-      question: "Python or JavaScript?",
-      answerA: "Python",
-      answerB: "JavaScript",
-      votesA: 9,
-      votesB: 15,
-    },
-    {
-      id: 2,
-      question: "Biggie or Tupac?",
-      answerA: "Biggie",
-      answerB: "Tupac",
-      votesA: 12,
-      votesB: 8,
-    },
-  ];
 
   const handleAdd = (e) => {
     const poll = e.detail;
