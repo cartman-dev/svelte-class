@@ -12,6 +12,10 @@
   const tabChange = (e) => {
     activeItem = e.detail;
   };
+
+  const handleAdd = (e) => {
+    activeItem = "Current Polls";
+  };
 </script>
 
 <style>
@@ -28,7 +32,7 @@
   {#if activeItem === 'Current Polls'}
     <PollList />
   {:else if activeItem === 'Add New Poll'}
-    <CreatePollForm />
+    <CreatePollForm on:add={handleAdd} />
   {/if}
 </main>
 <Footer />

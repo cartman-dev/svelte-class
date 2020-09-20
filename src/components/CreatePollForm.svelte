@@ -1,5 +1,6 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
+  import PollStore from "../stores/PollStore.js";
+  import { createEventDispatcher } from "svelte";
   let dispatch = createEventDispatcher();
   import Button from "../shared/Button.svelte";
 
@@ -49,10 +50,15 @@
         ...fields,
         votesA: 0,
         votesB: 0,
-        id: Math.random()
+        id: Math.random(),
       };
 
-      dispatch('add', poll);
+      //Update PollStore
+      PollStore.update((currentPolls) => {
+        return [poll, ...currentPolls];
+      });
+
+      dispatch("add");
     }
   };
 </script>
@@ -77,7 +83,7 @@
   .error {
     font-weight: bold;
     font-size: 12px;
-    color: #d91b42
+    color: #d91b42;
   }
 </style>
 
