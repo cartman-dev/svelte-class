@@ -1,16 +1,9 @@
 <script>
-  import PollStore from './stores/PollStore.js';
   import Header from "./components/Header.svelte";
   import Footer from "./components/Footer.svelte";
   import PollList from "./components/PollList.svelte";
   import CreatePollForm from "./components/CreatePollForm.svelte";
   import Tabs from "./shared/Tabs.svelte";
-
-  // polls
-  export let polls = [];
-  PollStore.subscribe(data => {
-    polls = data;
-  });
 
   // tabs
   let items = ["Current Polls", "Add New Poll"];
@@ -18,25 +11,6 @@
 
   const tabChange = (e) => {
     activeItem = e.detail;
-  };
-
-  const handleAdd = (e) => {
-    const poll = e.detail;
-    polls = [poll, ...polls];
-    activeItem = "Current Polls";
-  };
-
-  const handleVote = (e) => {
-    const { id, option } = e.detail;
-    let copiedPolls = [...polls];
-    let upvotedPoll = copiedPolls.find((poll) => poll.id == id);
-    if (option === "a") {
-      upvotedPoll.votesA++;
-    }
-    if (option === "b") {
-      upvotedPoll.votesB++;
-    }
-    polls = copiedPolls;
   };
 </script>
 
@@ -52,9 +26,9 @@
 <main>
   <Tabs {items} {activeItem} on:tabChange={tabChange} />
   {#if activeItem === 'Current Polls'}
-    <PollList {polls} on:vote={handleVote} />
+    <PollList />
   {:else if activeItem === 'Add New Poll'}
-    <CreatePollForm on:add={handleAdd} />
+    <CreatePollForm />
   {/if}
 </main>
 <Footer />
