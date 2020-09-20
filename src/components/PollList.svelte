@@ -1,11 +1,23 @@
 <script>
-  import PollStore from '../stores/PollStore.js';
+  import PollStore from "../stores/PollStore.js";
   import PollDetails from "../shared/PollDetails.svelte";
+  import { onDestroy, onMount } from "svelte";
 
   export let polls = [];
 
-  PollStore.subscribe(data => {
+  const unsub = PollStore.subscribe((data) => {
     polls = data;
+  });
+
+  onMount(() => {
+    // Maybe get data
+    console.log("Component mounted.");
+  });
+
+  onDestroy(() => {
+    // Maybe unsubscribe
+    console.log("Destroyed");
+    unsub();
   });
 </script>
 
